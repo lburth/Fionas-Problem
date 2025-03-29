@@ -1,5 +1,9 @@
 \documentclass{article}
 \usepackage{graphicx} % Required for inserting images
+\setlength\parindent{0pt}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
 
 \title{Fiona's Problem}
 \author{SimTech Gang}
@@ -9,7 +13,7 @@
 
 \maketitle
 
-\section{Introduction}
+\section{Problem}
 God picks two numbers $a,b \in \{2,\ldots,99\}$ and gives their product $P = a\cdot b$ to Gauss and their sum $S = a+b$ to Euler. The two mathematicians are not allowed to communicate, but they can speak out loud their thoughts.
 
 The conversation proceeds as follows:
@@ -20,12 +24,90 @@ The conversation proceeds as follows:
 \item Euler: \emph{Now I know them too.}
 \end{enumerate}
 
-\section{Solution}
-Gauss does not know the solution. This means that the factorization of $P$ into two numbers is not unique. In addition, Euler knew that Gauss did not knew, which means for each pair of numbers $(a',b')$ which sum up to S, the product $P' = a'\cdot b'$ cannot be factorized uniquely into to factors $a$ and $b$.
+The problem now is to find out what the numbers $a$ and $b$ are and how Gauss and Euler were able to find out.
 
-By going through all possible sums $S \in \{4,\ldots,198\}$. We find the following possible values for $S$:
+\section{Solution}
+Gauss states he does not know the solution. This means that the factorization of $P$ into two numbers $a,b$ with $a \cdot b = P$ is not unique.
+
+Now, Euler gives the hint that he \emph{knew}, that Gauss cannot know. This indicates that for every possible pair of numbers $a',b'$ that sum up to $S = a' + b'$, the product $P' = a'\cdot b'$ cannot be factorized uniquely into two factors $a$ and $b$.
+
+
+By going through all possible sums $S \in \{4,\ldots,198\}$, we find the following values for $S$ that fulfill this property:
 
 11, 17, 23, 27, 29, 35, 37, 41, 47, 53
 
-TO BE FINISHED
+and Euler has to have one of these numbers.
+
+Gauss knows this and can now determine the numbers $a$ and $b$. To understand how this works, we can look at all possible sums Euler could have been told, shown in Table \ref{full dubioses dict}.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{sum} (Euler) & \textbf{possible products} (Gauss) \\ \toprule
+11 & 18, 24, 28, 30 \\ \midrule
+17 & 30, 42, 52, 60, 66, 70, 72 \\ \midrule
+23 & 42, 60, 76, 90, 102, 112, 120, 126, 130, 132 \\ \midrule
+27 & 50, 72, 92, 110, 126, 140, 152, 162, 170, 176, 180, 182 \\ \midrule
+29 & 54, 78, 100, 120, 138, 154, 168, 180, 190, 198, 204, 208, 210 \\ \midrule
+35 & 66, 96, 124, 150, 174, 196, 216, 234, 250, 264, 276, 286, 294, \\ & 300, 304, 306 \\ \midrule
+37 & 70, 102, 132, 160, 186, 210, 232, 252, 270, 286, 300, 312, 322, \\ & 330, 336, 340, 342 \\ \midrule
+41 & 78, 114, 148, 180, 210, 238, 264, 288, 310, 330, 348, 364, 378, \\ & 390, 400, 408, 414, 418, 420 \\ \midrule
+47 & 90, 132, 172, 210, 246, 280, 312, 342, 370, 396, 420, 442, 462, \\ & 480, 496, 510, 522, 532, 540, 546, 550, 552 \\ \midrule
+53 & 102, 150, 196, 240, 282, 322, 360, 396, 430, 462, 492, 520, 546, \\ & 570, 592, 612, 630, 646, 660, 672, 682, 690, 696, 700, 702 \\ \bottomrule
+\end{tabular}
+
+\caption{All possible sums and the corresponding products that Euler can have.}
+\label{full dubioses dict}
+
+\end{table}
+
+\newpage
+
+From this, we cannot find out how Gauss knows the values of $a,b$. By taking a closer look at Table \ref{full dubioses dict} we can see that possible products show up more than once as they can be formed for different sums. For example, the number 30 can be found for $S = 11$ and $S = 17$. The values for $a,b$ are then:
+
+\begin{align*}
+    a = 6, b = 5 \hspace{10pt} \Rightarrow \hspace{10pt} S = 11, P = 30, \\
+    a = 15, b = 2 \hspace{10pt} \Rightarrow \hspace{10pt} S = 17, P = 30.
+\end{align*}
+
+From this, we can conclude that Gauss cannot have numbers that appear multiple times, like the 30, because he would not be able to tell the numbers $a,b$ in this case.
+
+By removing all numbers that occur multiple times, we receive Table \ref{edited dubioses dict}.
+
+\newpage 
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{sum} (Euler) & \textbf{possible products} (Gauss) \\ \toprule
+11 & 18, 24, 28 \\ \midrule
+17 & 52 \\ \midrule
+23 & 76, 112, 130 \\ \midrule
+27 & 50, 92, 110, 140, 152, 162, 170, 176, 182 \\ \midrule
+29 & 54, 100, 138, 154, 168, 190, 198, 204, 208 \\ \midrule
+35 & 96, 124, 174, 216, 234, 250, 276, 294, 304, 306 \\ \midrule
+37 & 160, 186, 232, 252, 270, 336, 340 \\ \midrule
+41 & 114, 148, 238, 288, 310, 348, 364, 378, 390, 400, 408, 414, 418 \\ \midrule
+47 & 172, 246, 280, 370, 442, 480, 496, 510, 522, 532, 540, 550, 552 \\ \midrule
+53 & 240, 282, 360, 430, 492, 520, 570, 592, 612, 630, 646, 660, 672, \\ & 682, 690, 696, 700, 702 \\ \bottomrule
+\end{tabular}
+
+\caption{Table \ref{full dubioses dict} after removing numbers that appear more than once.}
+\label{edited dubioses dict}
+
+\end{table}
+
+These are all possible products that Gauss can have and uniquely determine the values of $a,b$. Gauss now knows $a,b$ and tells Euler that he does. Euler answers, that he now knows too.
+
+By looking at Table \ref{edited dubioses dict}, we can see why this works. If Gauss would have the number 18, he would be able to conclude that Euler has the number 11, and could determine $a $and $b$. But Euler would not be able to tell, because he does not know whether Gauss has 18, 24, or 28.
+
+So, the only possibility left is the second row in Table \ref{edited dubioses dict}, where Euler also knows both the sum and the product.
+
+With this, we can conclude that Euler has the number $S = 17$, and Gauss $P = 52$.
+
+This uniquely determines the numbers $a = 13$ and $b = 4$. $\square$
+
 \end{document}
+
